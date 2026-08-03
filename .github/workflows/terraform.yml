@@ -22,7 +22,10 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.0
+          # 1.6.0 ships an embedded HashiCorp GPG key that has since expired, so
+          # provider installs fail with "error checking signature: openpgp: key
+          # expired". Pinned to the version used locally instead.
+          terraform_version: 1.15.8
 
       - name: Terraform Format Check
         id: fmt
